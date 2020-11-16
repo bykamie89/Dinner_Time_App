@@ -31,7 +31,7 @@ function MyTabs() {
         component={WelcomeScreen}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faHome} />,
+          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faHome} size={30}/>,
         }}
       />
       <Tab.Screen
@@ -39,7 +39,7 @@ function MyTabs() {
         component={UserScreen}
         options={{
           tabBarLabel: 'User',
-          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faUser} />,
+          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faUser} size={30}/>,
         }}
       />
       <Tab.Screen
@@ -47,7 +47,7 @@ function MyTabs() {
         component={FavoritesScreen}
         options={{
           tabBarLabel: 'Favorites',
-          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faHeart} />,
+          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faHeart} size={30}/>,
         }}
       />
       <Tab.Screen
@@ -55,7 +55,7 @@ function MyTabs() {
         component={ShoppingCartScreen}
         options={{
           tabBarLabel: 'Shopping cart',
-          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faShoppingBasket} />,
+          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faShoppingBasket} size={30}/>,
         }}
       />
       <Tab.Screen
@@ -63,7 +63,7 @@ function MyTabs() {
         component={RecipeScreen}
         options={{
           tabBarLabel: 'Recipies',
-          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faBookOpen} />,
+          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faBookOpen} size={30}/>,
         }}
       />
     </Tab.Navigator>
