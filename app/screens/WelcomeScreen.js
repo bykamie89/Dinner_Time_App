@@ -4,6 +4,7 @@ import {
   View,
   Text,
 } from 'react-native';
+import logo from '../components/image'
 
 
 function WelcomeScreen(props) {
@@ -12,7 +13,9 @@ function WelcomeScreen(props) {
       <View style={styles.logoContainer}>
               <Text style={styles.logoText}>Dinner time</Text>
       </View>
-      <View></View>
+          <View>
+            <logo/>
+      </View>
     </View>
   );
 }
