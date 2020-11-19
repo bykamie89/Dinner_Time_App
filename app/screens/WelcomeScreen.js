@@ -1,47 +1,27 @@
-import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  Image,
-  TextInput,
-  Button,
-} from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-
-function WelcomeScreen(props) {
-  return (
-    <View style={styles.background}>
-      <View style={styles.logoContainer}>
-        <Text style={styles.logoText}>Dinner time</Text>
+import React, { Component } from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import SearchBar from '../components/SearchBar';
+import Images from '../components/Images';
+export default class WelcomeScreen extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <View style={styles.background}>
+        <View style={styles.logoContainer}>
+          <Text style={styles.logoText}>Dinner time</Text>
+        </View>
+        <SearchBar />
+        <View style={styles.ImageContainer}>
+          <Images />
+          <Images />
+          <Images />
+          <Images />
+        </View>
       </View>
-      <View style={styles.InputTextContainer}>
-        <TextInput
-          style={styles.InputText}
-          placeholder='Search ingredients'
-          placeholderTextColor='black'
-        />
-        <FontAwesomeIcon icon={faSearch} size={10} />
-      </View>
-
-      <View style={styles.ImageContainer}>
-        <TouchableOpacity
-          onPress={() => alert('image clicked')}
-          style={styles.ImageStyle}
-        >
-          <View styles={styles.Image}>
-            <Image
-              source={require('../../assets/3FD81FC5-A315-4AF6-9083-F862FB97C07B_4_5005_c.jpeg')}
-              style={styles.Image}
-            />
-            <Text style={styles.ImageText}>Title</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
-    </View>
-  );
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -97,5 +77,3 @@ const styles = StyleSheet.create({
     paddingTop: 5,
   },
 });
-
-export default WelcomeScreen;

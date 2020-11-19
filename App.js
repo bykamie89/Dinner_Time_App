@@ -68,10 +68,10 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name='RecipeDescription'
-        component={RecipeDescription}
+        name='RecipeScreen'
+        component={RecipeScreen}
         options={{
-          tabBarLabel: 'Recipies',
+          tabBarLabel: 'Recipes',
           tabBarIcon: ({ color, size }) => (
             <FontAwesomeIcon icon={faBookOpen} size={30} />
           ),

@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react';
-import { TextInput, StyleSheet } from 'react-native';
-import CardView from 'react-native-cardview';
+import React, { Component } from 'react';
+import { StyleSheet, View, TextInput } from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-export default class searchBar extends PureComponent {
+export default class SearchBar extends Component {
   constructor(props) {
     super(props);
   }
