@@ -24,18 +24,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  logo: {
-    width: 100,
-    height: 100,
-  },
   logoContainer: {
     position: 'absolute',
-    top: 70,
-    alignItems: 'center',
+    top: 90,
+      alignItems: 'center',
+      width: '80%',
+    
   },
   logoText: {
     fontStyle: 'normal',
-    fontSize: 30,
+      fontSize: 30,
+    paddingBottom: 30,
   },
   navigationBottomBar: {
     flex: 1,

@@ -1,16 +1,11 @@
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-} from 'react-native';
-
+import { StyleSheet, View, Text } from 'react-native';
 
 function UserScreen(props) {
   return (
     <View style={styles.background}>
       <View style={styles.logoContainer}>
-              <Text style={styles.logoText}>User</Text>
+        <Text style={styles.logoText}>User</Text>
       </View>
       <View></View>
     </View>
@@ -24,18 +19,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  logo: {
-    width: 100,
-    height: 100,
-  },
+
   logoContainer: {
     position: 'absolute',
-    top: 70,
+    top: 105,
     alignItems: 'center',
+    width: '80%',
   },
   logoText: {
     fontStyle: 'normal',
     fontSize: 30,
+    paddingBottom: 30,
   },
   navigationBottomBar: {
     flex: 1,

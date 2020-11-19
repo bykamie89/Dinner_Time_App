@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Text, View} from 'react-native';
+import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -16,6 +16,7 @@ import UserScreen from './app/screens/UserScreen';
 import FavoritesScreen from './app/screens/FavoritesScreen';
 import ShoppingCartScreen from './app/screens/ShoppingCartScreen';
 import RecipeScreen from './app/screens/RecipeScreen';
+import RecipeDescription from './app/screens/RecipeDescription';
 
 const Tab = createBottomTabNavigator();
 
@@ -31,7 +32,9 @@ function MyTabs() {
         component={WelcomeScreen}
         options={{
           tabBarLabel: 'Home',
-          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faHome} size={30}/>,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faHome} size={30} />
+          ),
         }}
       />
       <Tab.Screen
@@ -39,7 +42,9 @@ function MyTabs() {
         component={UserScreen}
         options={{
           tabBarLabel: 'User',
-          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faUser} size={30}/>,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faUser} size={30} />
+          ),
         }}
       />
       <Tab.Screen
@@ -47,7 +52,9 @@ function MyTabs() {
         component={FavoritesScreen}
         options={{
           tabBarLabel: 'Favorites',
-          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faHeart} size={30}/>,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faHeart} size={30} />
+          ),
         }}
       />
       <Tab.Screen
@@ -55,15 +62,19 @@ function MyTabs() {
         component={ShoppingCartScreen}
         options={{
           tabBarLabel: 'Shopping cart',
-          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faShoppingBasket} size={30}/>,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faShoppingBasket} size={30} />
+          ),
         }}
       />
       <Tab.Screen
-        name='RecipeScreen'
-        component={RecipeScreen}
+        name='RecipeDescription'
+        component={RecipeDescription}
         options={{
           tabBarLabel: 'Recipies',
-          tabBarIcon: ({ color, size }) => <FontAwesomeIcon icon={faBookOpen} size={30}/>,
+          tabBarIcon: ({ color, size }) => (
+            <FontAwesomeIcon icon={faBookOpen} size={30} />
+          ),
         }}
       />
     </Tab.Navigator>
@@ -77,4 +88,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
