@@ -1,46 +1,89 @@
+// React Native Axios – To Make HTTP API call in React Native
+// https://aboutreact.com/react-native-axios/
+
 import React from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-} from 'react-native';
+//import React in our code.
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+//import all the components we are going to use.
+import axios from 'axios';
 
+const RecipeScreen = () => {
+  const getDataUsingAsyncAwaitGetCall = async () => {
+    try {
+      const response = await axios.get(
+        'https://api.spoonacular.com/recipes/716429/information?apiKey=d853ebc6b13941b5ba456a4911eb8f9d'
+      );
+      alert(JSON.stringify(response.data));
+    } catch (error) {
+      // handle error
+      alert(error.message);
+    }
+  };
 
-function RecipeScreen(props) {
+  const multipleRequestsInSingleCall = () => {
+    axios
+      .all([
+        axios
+          .get('https://jsonplaceholder.typicode.com/posts/1')
+          .then(function (response) {
+            // handle success
+            alert('Post 1 : ' + JSON.stringify(response.data));
+          }),
+        axios
+          .get('https://jsonplaceholder.typicode.com/posts/2')
+          .then(function (response) {
+            // handle success
+            alert('Post 2 : ' + JSON.stringify(response.data));
+          }),
+      ])
+      .then(
+        axios.spread(function (acct, perms) {
+          // Both requests are now complete
+          alert('Both requests are now complete');
+        })
+      );
+  };
+
   return (
-    <View style={styles.background}>
-      <View style={styles.logoContainer}>
-              <Text style={styles.logoText}>Recipies</Text>
-      </View>
-      <View></View>
+    <View style={styles.container}>
+      <Text style={{ fontSize: 30, textAlign: 'center' }}>
+        Example of Axios Networking in React Native
+      </Text>
+      {/*Running GET Request*/}
+
+      <TouchableOpacity
+        style={styles.buttonStyle}
+        onPress={getDataUsingAsyncAwaitGetCall}
+      >
+        <Text>Get Data Using Async Await GET</Text>
+      </TouchableOpacity>
+
+      <TouchableOpacity
+        style={styles.buttonStyle}
+        onPress={multipleRequestsInSingleCall}
+      >
+        <Text>Multiple Concurrent Requests In Single Call</Text>
+      </TouchableOpacity>
+
+      <Text style={{ textAlign: 'center', marginTop: 18 }}>
+        www.aboutreact.com
+      </Text>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
-  background: {
-    backgroundColor: 'white',
+  container: {
+    justifyContent: 'center',
     flex: 1,
-    justifyContent: 'flex-end',
+    padding: 16,
+  },
+  buttonStyle: {
     alignItems: 'center',
-  },
-  logoContainer: {
-    position: 'absolute',
-    top: 90,
-      alignItems: 'center',
-      width: '80%',
-    
-  },
-  logoText: {
-    fontStyle: 'normal',
-      fontSize: 30,
-    paddingBottom: 30,
-  },
-  navigationBottomBar: {
-    flex: 1,
+    backgroundColor: '#DDDDDD',
+    padding: 10,
     width: '100%',
-    height: 70,
-    backgroundColor: 'lightgrey',
+    marginTop: 16,
   },
 });
 

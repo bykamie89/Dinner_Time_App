@@ -1,23 +1,88 @@
 import React, { Component } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, FlatList } from 'react-native';
 import SearchBar from '../components/SearchBar';
-import Images from '../components/Images';
+import recipesSearched from '../components/recipesSearched';
+import settings from '../public/settings';
+
 export default class WelcomeScreen extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      users: [],
+      searchValue: '',
+      recipes: [],
+      isLoading: true,
+    };
+    this._renderItem = this._renderItem.bind(this);
   }
+
+  _handleSubmitEditing() {
+    let words = this.state.searchValue.replace(/ +/g, ',');
+    this.props.navigation.navigate('About', { ingredients: words });
+  }
+
+  async getRecipes() {
+    try {
+      const req = await fetch(
+        `${settings.URL}random?number=1&apiKey=${settings.API_KEY}`
+      );
+      const result = await req.json();
+      for (let items of result.results) {
+        this.state.recipes.push(items);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      this.setState({ isLoading: false });
+    }
+  }
+
+  componentDidMount() {
+    this.getRecipes();
+  }
+
+  _renderItem({ item, index }) {
+    return (
+      <RecipesSearched
+        title={item.title}
+        source={{ uri: `https://spoonacular.com/recipeImages/${item.image}` }}
+        ready={item.readyInMinutes}
+        servings={item.servings}
+        onPress={() =>
+          this.props.navigation.navigate('Description', {
+            id: item.id,
+            title: item.title,
+            servings: item.servings,
+            readyInMinutes: item.readyInMinutes,
+            img: item.image,
+          })
+        }
+      />
+    );
+  }
+
   render() {
     return (
       <View style={styles.background}>
         <View style={styles.logoContainer}>
           <Text style={styles.logoText}>Dinner time</Text>
         </View>
-        <SearchBar />
+        <View style={{ marginTop: 10 }}>
+          <SearchBar
+            onChangeText={(text) => this.setState({ searchValue: text })}
+            placeholder='Search'
+            placeholderTextColor='#c9c9c9'
+            blurOnSubmit={true}
+            onSubmitEditing={() => this._handleSubmitEditing()}
+          />
+        </View>
         <View style={styles.ImageContainer}>
-          <Images />
-          <Images />
-          <Images />
-          <Images />
+          <FlatList
+            data={this.state.data}
+            renderItem={this._renderItem}
+            style={{ height: 100, width: 100 }}
+          />
         </View>
       </View>
     );
@@ -40,40 +105,11 @@ const styles = StyleSheet.create({
   logoText: {
     fontSize: 30,
   },
-
-  InputTextContainer: {
-    height: '15%',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  InputText: {
-    fontSize: 14,
-    paddingRight: '20%',
-    borderBottomColor: 'grey',
-    borderBottomWidth: 1,
-  },
   ImageContainer: {
     height: '70%',
-    width: '95%',
+    width: '100%',
     flexDirection: 'row',
-    flexWrap: 'wrap',
     justifyContent: 'space-between',
     padding: 5,
-  },
-  ImageStyle: {
-    width: '32%',
-    height: '33%',
-    padding: 5,
-  },
-  Image: {
-    height: '80%',
-    width: '100%',
-  },
-  ImageText: {
-    alignSelf: 'center',
-    fontStyle: 'normal',
-    fontSize: 12,
-    paddingTop: 5,
   },
 });

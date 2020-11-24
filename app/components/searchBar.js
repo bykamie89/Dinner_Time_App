@@ -1,36 +1,29 @@
-import React, { Component } from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
-import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import React, { PureComponent } from 'react';
+import { TextInput, StyleSheet } from 'react-native';
+import CardView from 'react-native-cardview';
 
-export default class SearchBar extends Component {
+export default class earchBar extends PureComponent {
   constructor(props) {
     super(props);
   }
   render() {
     return (
-      <View style={styles.InputTextContainer}>
-        <TextInput
-          style={styles.InputText}
-          placeholder='Search ingredients'
-          placeholderTextColor='black'
-        />
-        <FontAwesomeIcon icon={faSearch} size={10} />
-      </View>
+      <CardView cardElevation={7} cardMaxElevation={7} style={styles.searchBar}>
+        <TextInput {...this.props} style={styles.searchText} />
+      </CardView>
     );
   }
 }
+
 const styles = StyleSheet.create({
-  InputTextContainer: {
-    height: '15%',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+  searchBar: {
+    borderColor: '#C9C9C9',
+    borderWidth: 1,
+    marginRight: 15,
+    width: 350,
   },
-  InputText: {
-    fontSize: 14,
-    paddingRight: '20%',
-    borderBottomColor: 'grey',
-    borderBottomWidth: 1,
+  searchText: {
+    color: '#808080',
+    marginLeft: 15,
   },
 });
