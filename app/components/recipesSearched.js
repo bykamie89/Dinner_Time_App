@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import CardView from 'react-native-cardview';
 import { View, TouchableOpacity, StyleSheet, Text, Image } from 'react-native';
 
 export default class RecipesSearched extends PureComponent {
@@ -8,37 +7,18 @@ export default class RecipesSearched extends PureComponent {
   }
   render() {
     return (
-      <TouchableOpacity activeOpacity={0.8} onPress={this.props.onPress}>
-        <View style={{ width: 200, height: 150 }}>
-          <Image
-            style={styles.img}
-            resizeMode='contain'
-            source={this.props.source}
-          />
-        </View>
-        <View style={styles.resultBox}>
+      <TouchableOpacity
+        style={styles.resultBox}
+        activeOpacity={1}
+        onPress={this.props.onPress}
+      >
+        <Image style={styles.img} source={this.props.source} />
+        <View style={styles.TextStyle}>
           <Text style={styles.title}>{this.props.title}</Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: 16,
-              marginLeft: 24,
-            }}
-          >
-            <Text style={styles.subtitle}>Ready in: </Text>
-            <Text style={styles.answer}>{this.props.ready} minutes.</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginLeft: 24,
-            }}
-          >
-            <Text style={styles.subtitle}>servings: </Text>
-            <Text style={styles.answer}>{this.props.servings}</Text>
-          </View>
+          <Text style={styles.subtitle}>Ready in: </Text>
+          <Text style={styles.answer}>{this.props.ready} minutes.</Text>
+          <Text style={styles.subtitle}>servings: </Text>
+          <Text style={styles.answer}>{this.props.servings}</Text>
         </View>
       </TouchableOpacity>
     );
@@ -47,32 +27,27 @@ export default class RecipesSearched extends PureComponent {
 
 const styles = StyleSheet.create({
   resultBox: {
-    width: 200,
+    width: '90%',
     height: 150,
-    backgroundColor: 'rgba(0, 0, 0, 0.1)',
-    marginRight: 16,
-    borderBottomLeftRadius: 16,
-    borderBottomRightRadius: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    borderColor: 'lightgrey',
+    borderWidth: 1,
+    marginTop: 10,
+    marginBottom: 10,
+    alignSelf: 'center',
+    marginLeft: -20,
   },
   img: {
-    flex: 1,
+    flex: 0.5,
     width: null,
     height: null,
-    resizeMode: 'cover',
-    borderTopRightRadius: 16,
-    borderTopLeftRadius: 16,
+    resizeMode: 'center',
   },
-  title: {
-    fontSize: 18,
-    color: '#000',
-    textAlign: 'center',
-  },
-  subtitle: {
+  TextStyle: {
+    flex: 0.5,
+    marginLeft: 30,
     fontSize: 16,
-    color: '#000',
-  },
-  answer: {
-    fontSize: 16,
-    color: '#000',
+    alignSelf: 'center',
   },
 });

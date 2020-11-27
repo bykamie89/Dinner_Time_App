@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text, ScrollView, FlatList } from 'react-native';
 import SearchBar from '../components/SearchBar';
-import recipesSearched from '../components/recipesSearched';
 import settings from '../public/settings';
+import RecipesSearched from '../components/recipesSearched';
 
 export default class WelcomeScreen extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ export default class WelcomeScreen extends Component {
   async getRecipes() {
     try {
       const req = await fetch(
-        `${settings.URL}random?number=1&apiKey=${settings.API_KEY}`
+        `${settings.URL}search?query=dinner&number=20&instructionsRequired=true&apiKey=${settings.API_KEY}`
       );
       const result = await req.json();
       for (let items of result.results) {
@@ -71,17 +71,18 @@ export default class WelcomeScreen extends Component {
         <View style={{ marginTop: 10 }}>
           <SearchBar
             onChangeText={(text) => this.setState({ searchValue: text })}
-            placeholder='Search'
-            placeholderTextColor='#c9c9c9'
+            placeholder='Search for recipies'
+            placeholderTextColor='black'
             blurOnSubmit={true}
             onSubmitEditing={() => this._handleSubmitEditing()}
           />
         </View>
         <View style={styles.ImageContainer}>
           <FlatList
-            data={this.state.data}
+            directionalLockEnabled={true}
+            data={this.state.recipes}
             renderItem={this._renderItem}
-            style={{ height: 100, width: 100 }}
+            keyExtractor={(item, index) => index.toString()}
           />
         </View>
       </View>
@@ -100,16 +101,15 @@ const styles = StyleSheet.create({
     height: '15%',
     justifyContent: 'center',
     alignItems: 'center',
-    top: 60,
+    top: 40,
   },
   logoText: {
     fontSize: 30,
   },
   ImageContainer: {
     height: '70%',
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+    width: 410,
+    alignItems: 'center',
     padding: 5,
   },
 });

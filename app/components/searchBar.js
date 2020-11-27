@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { TextInput, StyleSheet } from 'react-native';
 import CardView from 'react-native-cardview';
 
-export default class earchBar extends PureComponent {
+export default class searchBar extends PureComponent {
   constructor(props) {
     super(props);
   }
@@ -17,13 +17,13 @@ export default class earchBar extends PureComponent {
 
 const styles = StyleSheet.create({
   searchBar: {
-    borderColor: '#C9C9C9',
-    borderWidth: 1,
+    borderBottomColor: '#C9C9C9',
+    borderBottomWidth: 1,
     marginRight: 15,
-    width: 350,
+    width: 300,
   },
   searchText: {
-    color: '#808080',
+    color: 'black',
     marginLeft: 15,
   },
 });

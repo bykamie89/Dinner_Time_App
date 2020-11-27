@@ -10,8 +10,6 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import RecipesSearched from '../components/recipesSearched';
-import CardView from 'react-native-cardview';
-import Carousel, { Pagination } from 'react-native-snap-carousel';
 import settings from '../public/settings';
 
 export default class ResultScreen extends Component {
@@ -48,31 +46,6 @@ export default class ResultScreen extends Component {
     this.getRecipes();
   }
 
-  get pagination() {
-    const { recipes, activeSlide } = this.state;
-    return (
-      <Pagination
-        dotsLength={recipes.length}
-        activeDotIndex={activeSlide}
-        containerStyle={{ backgroundColor: 'rgba(0, 0, 0, 0)', height: 70 }}
-        dotStyle={{
-          width: 10,
-          height: 10,
-          borderRadius: 5,
-          marginHorizontal: 1,
-          backgroundColor: 'rgba(0, 0, 0, 0.92)',
-        }}
-        inactiveDotStyle={
-          {
-            // Define styles for inactive dots here
-          }
-        }
-        inactiveDotOpacity={0.4}
-        inactiveDotScale={0.6}
-      />
-    );
-  }
-
   _renderItem({ item, index }) {
     return (
       <RecipesSearched
@@ -81,7 +54,7 @@ export default class ResultScreen extends Component {
         ready={item.readyInMinutes}
         servings={item.servings}
         onPress={() =>
-          this.props.navigation.navigate('Instructions', {
+          this.props.navigation.navigate('Description', {
             id: item.id,
             title: item.title,
             servings: item.servings,
@@ -95,77 +68,60 @@ export default class ResultScreen extends Component {
 
   render() {
     return (
-      <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
+      <SafeAreaView style={styles.background}>
+        <View style={styles.logoContainer}>
           <Image
             style={styles.img}
             source={require('../../assets/B77EAB1F-1B4E-4BCF-B976-B1EAA0E4FB07_4_5005_c.jpeg')}
           />
+          <Text style={styles.logoText}>Recipes that matches your search</Text>
         </View>
-        <CardView
-          cardElevation={7}
-          cardMaxElevation={7}
-          style={styles.resultBox}
-        >
-          <Text style={styles.title}>Recipes</Text>
-          <Text style={styles.description}>
-            Take advantage of our list of recipes made for you!
-          </Text>
+        <View style={styles.ImageContainer}>
           {this.state.isLoading ? (
             <ActivityIndicator />
           ) : (
-            <View style={{ alignItems: 'center', marginLeft: -16 }}>
-              <Carousel
-                ref={() => (this._carousel = ref)}
-                data={this.state.recipes}
-                renderItem={this._renderItem}
-                sliderWidth={250}
-                layoutCardOffset={9}
-                itemWidth={200}
-                layout={'default'}
-                onSnapToItem={(index) => this.setState({ activeSlide: index })}
-              />
-              {this.pagination}
-            </View>
+            <FlatList
+              showsVerticalScrollIndicator={false}
+              showsHorizontalScrollIndicator={false}
+              directionalLockEnabled={true}
+              data={this.state.recipes}
+              renderItem={this._renderItem}
+              keyExtractor={(item, index) => index.toString()}
+            />
           )}
-        </CardView>
+        </View>
       </SafeAreaView>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  background: {
+    backgroundColor: 'white',
     flex: 1,
   },
-  header: {
+  logoContainer: {
+    height: 250,
     width: '100%',
-    height: 210,
+    top: 60,
+    marginTop: -30,
   },
   img: {
-    flex: 1,
+    flex: 0.7,
     width: null,
     height: null,
-    resizeMode: 'cover',
   },
-  resultBox: {
-    height: 480,
-    marginLeft: 32,
-    backgroundColor: '#FFF',
-    marginTop: -110,
-    paddingTop: 16,
-    paddingLeft: 16,
+  logoText: {
+    flex: 0.3,
+    fontSize: 20,
+    alignSelf: 'center',
+    marginTop: 30,
+    marginBottom: 30,
   },
-  title: {
-    fontSize: 32,
-
-    color: '#1B1B13',
-  },
-  description: {
-    fontSize: 16,
-    color: '#808080',
-    marginTop: 8,
-    marginBottom: 24,
-    marginRight: 30,
+  ImageContainer: {
+    height: '70%',
+    width: 410,
+    alignItems: 'center',
+    padding: 5,
   },
 });

@@ -8,49 +8,17 @@ export default class Images extends Component {
     super(props);
   }
   render() {
-    const getDataUsingAsyncAwaitGetCall = async () => {
-      try {
-        const response = await axios.get(
-          `${settings.URL}visualizeRecipe/&apiKey=${settings.API_KEY}`
-        );
-        alert(JSON.stringify(response.data));
-      } catch (error) {
-        // handle error
-        alert(error.message);
-      }
-    };
     return (
-      <TouchableOpacity activeOpacity={0.8} onPress={this.props.onPress}>
-        <View style={{ width: 200, height: 150 }}>
+      <TouchableOpacity
+        onPress={getDataUsingAsyncAwaitGetCall}
+        style={styles.ImageStyle}
+      >
+        <View>
           <Image
-            style={styles.img}
-            resizeMode='contain'
-            source={this.props.source}
+            source={require('../../assets/3FD81FC5-A315-4AF6-9083-F862FB97C07B_4_5005_c.jpeg')}
+            style={styles.Image}
           />
-        </View>
-        <View style={styles.resultBox}>
-          <Text style={styles.title}>{this.props.title}</Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginTop: 16,
-              marginLeft: 24,
-            }}
-          >
-            <Text style={styles.subtitle}>Ready in: </Text>
-            <Text style={styles.answer}>{this.props.ready} minutes.</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginLeft: 24,
-            }}
-          >
-            <Text style={styles.subtitle}>servings: </Text>
-            <Text style={styles.answer}>{this.props.servings}</Text>
-          </View>
+          <Text style={styles.ImageText}>Title</Text>
         </View>
       </TouchableOpacity>
     );
@@ -58,8 +26,8 @@ export default class Images extends Component {
 }
 const styles = StyleSheet.create({
   ImageStyle: {
-    width: '33%',
-    height: '100%',
+    width: '32%',
+    height: '33%',
     padding: 5,
   },
   Image: {
