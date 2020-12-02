@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
+import { CheckBox } from 'react-native-elements';
 
 function ShoppingCartScreen(props) {
   return (
@@ -7,7 +8,12 @@ function ShoppingCartScreen(props) {
       <View style={styles.logoContainer}>
         <Text style={styles.logoText}>Shopping cart</Text>
       </View>
-      <View></View>
+      <View style={styles.checkBoxContainer}>
+        <CheckBox title='Chicken' />
+        <CheckBox title='Rice' />
+        <CheckBox title='Coconut milk' />
+        <CheckBox title='Curry' />
+      </View>
     </View>
   );
 }
@@ -32,11 +38,9 @@ const styles = StyleSheet.create({
     paddingBottom: 30,
   },
 
-  navigationBottomBar: {
-    flex: 1,
-    width: '100%',
-    height: 70,
-    backgroundColor: 'lightgrey',
+  checkBoxContainer: {
+    height: '75%',
+    width: '90%',
   },
 });
 

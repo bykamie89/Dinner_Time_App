@@ -1,89 +1,101 @@
-// React Native Axios – To Make HTTP API call in React Native
-// https://aboutreact.com/react-native-axios/
-
 import React from 'react';
-//import React in our code.
-import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
-//import all the components we are going to use.
-import axios from 'axios';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  TextInput,
+  Button,
+} from 'react-native';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-const RecipeScreen = () => {
-  const getDataUsingAsyncAwaitGetCall = async () => {
-    try {
-      const response = await axios.get(
-        'https://api.spoonacular.com/recipes/716429/information?apiKey=d853ebc6b13941b5ba456a4911eb8f9d'
-      );
-      alert(JSON.stringify(response.data));
-    } catch (error) {
-      // handle error
-      alert(error.message);
-    }
-  };
-
-  const multipleRequestsInSingleCall = () => {
-    axios
-      .all([
-        axios
-          .get('https://jsonplaceholder.typicode.com/posts/1')
-          .then(function (response) {
-            // handle success
-            alert('Post 1 : ' + JSON.stringify(response.data));
-          }),
-        axios
-          .get('https://jsonplaceholder.typicode.com/posts/2')
-          .then(function (response) {
-            // handle success
-            alert('Post 2 : ' + JSON.stringify(response.data));
-          }),
-      ])
-      .then(
-        axios.spread(function (acct, perms) {
-          // Both requests are now complete
-          alert('Both requests are now complete');
-        })
-      );
-  };
-
+function RecipeScreen(props) {
   return (
-    <View style={styles.container}>
-      <Text style={{ fontSize: 30, textAlign: 'center' }}>
-        Example of Axios Networking in React Native
-      </Text>
-      {/*Running GET Request*/}
+    <View style={styles.background}>
+      <View style={styles.logoContainer}>
+        <Text style={styles.logoText}>Your recipes</Text>
+      </View>
+      <View style={styles.InputTextContainer}>
+        <TextInput
+          style={styles.InputText}
+          placeholder='Search Recipe'
+          placeholderTextColor='black'
+        />
+        <FontAwesomeIcon icon={faSearch} size={10} />
+      </View>
 
-      <TouchableOpacity
-        style={styles.buttonStyle}
-        onPress={getDataUsingAsyncAwaitGetCall}
-      >
-        <Text>Get Data Using Async Await GET</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity
-        style={styles.buttonStyle}
-        onPress={multipleRequestsInSingleCall}
-      >
-        <Text>Multiple Concurrent Requests In Single Call</Text>
-      </TouchableOpacity>
-
-      <Text style={{ textAlign: 'center', marginTop: 18 }}>
-        www.aboutreact.com
-      </Text>
+      <View style={styles.ImageContainer}>
+        <TouchableOpacity
+          onPress={() => alert('image clicked')}
+          style={styles.ImageStyle}
+        >
+          <View styles={styles.Image}>
+            <Image
+              source={require('../../assets/3FD81FC5-A315-4AF6-9083-F862FB97C07B_4_5005_c.jpeg')}
+              style={styles.Image}
+            />
+            <Text style={styles.ImageText}>Title</Text>
+          </View>
+        </TouchableOpacity>
+      </View>
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
+  background: {
+    backgroundColor: 'white',
     flex: 1,
-    padding: 16,
-  },
-  buttonStyle: {
+    justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 10,
+  },
+  logoContainer: {
+    height: '15%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: 60,
+  },
+  logoText: {
+    fontSize: 30,
+  },
+
+  InputTextContainer: {
+    height: '15%',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  InputText: {
+    fontSize: 14,
+    paddingRight: '20%',
+    borderBottomColor: 'grey',
+    borderBottomWidth: 1,
+  },
+
+  ImageContainer: {
+    height: '70%',
+    width: '95%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    padding: 5,
+  },
+  ImageStyle: {
+    width: '32%',
+    height: '33%',
+    padding: 5,
+  },
+  Image: {
+    height: '80%',
     width: '100%',
-    marginTop: 16,
+  },
+  ImageText: {
+    alignSelf: 'center',
+    fontStyle: 'normal',
+    fontSize: 12,
+    paddingTop: 5,
   },
 });
 

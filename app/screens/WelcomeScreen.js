@@ -80,6 +80,7 @@ export default class WelcomeScreen extends Component {
         <View style={styles.ImageContainer}>
           <FlatList
             directionalLockEnabled={true}
+            showsHorizontalScrollIndicator={false}
             data={this.state.recipes}
             renderItem={this._renderItem}
             keyExtractor={(item, index) => index.toString()}

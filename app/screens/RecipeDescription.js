@@ -13,6 +13,8 @@ import {
 import settings from '../public/settings';
 import InstructionsComponent from '../components/instructionsComponent';
 import IngredientsComponent from '../components/ingredientsComponent';
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
 
 const screenHeight = Math.round(Dimensions.get('window').height);
 
@@ -91,7 +93,14 @@ export default class RecipeDescription extends Component {
             }}
           />
           <View style={{ marginHorizontal: 50 }}>
-            <Text style={styles.title}>{title}</Text>
+            <View style={{ flexDirection: 'row' }}>
+              <Text style={styles.title}>{title}</Text>
+              <FontAwesomeIcon
+                style={{ marginLeft: 20 }}
+                icon={faHeart}
+                size={30}
+              />
+            </View>
             <View
               style={[
                 styles.horizontal,
